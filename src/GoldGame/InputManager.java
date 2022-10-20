@@ -33,14 +33,14 @@ public class InputManager implements KeyListener
     	//눌러진 키보드 값이 왼쪽 화살표 키라면
     	if(e.getKeyCode() == KeyEvent.VK_LEFT)
     	{
-    		System.out.println("VK_LEFT");
+    		//System.out.println("VK_LEFT");
     		isLeftPressed = true;					//왼쪽 눌러졌다고 필드값 수정함(매 프레임마다 main()에서 이 값을 체크해서 햄스터에게 움직여라고 명령을 내릴지 말지 판단함) 
     		
     	}
     	
     	if(e.getKeyCode() == KeyEvent.VK_RIGHT)
     	{
-    		System.out.println("VK_RIGHT");
+    		//System.out.println("VK_RIGHT");
     		isRightPressed = true;
     	}
     }
@@ -50,13 +50,13 @@ public class InputManager implements KeyListener
         
     	if(e.getKeyCode() == KeyEvent.VK_LEFT)
     	{
-    		System.out.println("VK_LEFT 떼기");
+    		//System.out.println("VK_LEFT 떼기");
     		isLeftPressed = false;
     	}
     	
     	if(e.getKeyCode() == KeyEvent.VK_RIGHT)
     	{
-    		System.out.println("VK_RIGHT 떼기");
+    		//System.out.println("VK_RIGHT 떼기");
     		isRightPressed = false;
     	}
     }

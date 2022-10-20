@@ -3,14 +3,25 @@ import java.util.*;
 
 public class ItemManager
 {
+	public static ItemManager instance;
+	public ArrayList<Item> activatedItemList = new ArrayList<Item>();
 	
 	private final int itemCount;
 	private Queue<Item>[] itemPoolQueue;
 	private int activatedItemId = -1;
-	private ArrayList<Item> activatedItemList = new ArrayList<Item>();
+	
+	private int coinItemProbability = 60;
+	private int goldBarItemProbability = 25;
+	private int minusItemProbability = 15;
+	
+	private float remainItemTime;
+	
 	
 	ItemManager()
 	{
+		instance = this;
+		
+		remainItemTime = 0;
 		itemCount = 3;		//아이템 총 세개임
 		itemPoolQueue = new Queue[itemCount];
 		
@@ -19,13 +30,55 @@ public class ItemManager
 			itemPoolQueue[i] = new LinkedList<Item>();
 		}
 		
-		for(int i = 0 ; i < 50 ; i++)		//아이템을 미리 많이 만들어서 큐에 담아놓는다. 필요시 빼고 아이템이 사라져야할때 다시 넣음(오브젝트 풀링)
+		for(int i = 0 ; i < 5000 ; i++)		//아이템을 미리 많이 만들어서 큐에 담아놓는다. 필요시 빼고 아이템이 사라져야할때 다시 넣음(오브젝트 풀링)
 		{
 			itemPoolQueue[0].add(new CoinItem());
 			itemPoolQueue[1].add(new GoldBarItem());
 			itemPoolQueue[2].add(new MinusItem());
 		}
 				
+	}
+	
+	public void TrySetItem()
+	{
+		remainItemTime -= GameManager.deltaTime;
+		
+		if(remainItemTime <= 0f)
+		{
+			remainItemTime = 0.15f;			//아이템이 다시 떨어지기까지 걸리는 시간
+			int choicedItemNumber = GetChoicedItemNumber();
+			
+			Item item = GetItemFromObjectPool(choicedItemNumber);
+			//item.itemNumber
+			
+			float randomPosX = (float)Math.random() * 100f;
+			randomPosX *= GameManager.imageScaleRate;
+			
+			item.velocity = (float)Math.random() * 60f + 140f;
+			item.posX = randomPosX;
+			item.posY = -10 * GameManager.imageScaleRate;
+			
+		}
+	}
+	
+	private int GetChoicedItemNumber()
+	{
+		int randomNumber = (int)(Math.random() * 100);
+		int choicedItemNumber = 0;
+		if(randomNumber <= coinItemProbability)
+		{
+			choicedItemNumber = 0;
+		}
+		else if(randomNumber - coinItemProbability <= goldBarItemProbability)
+		{
+			choicedItemNumber = 1;
+		}
+		else
+		{
+			choicedItemNumber = 2;
+		}
+		
+		return choicedItemNumber;
 	}
 	
 	
@@ -49,6 +102,8 @@ public class ItemManager
 		{
 			if(item.GetActivatedItemId() == activatedItemList.get(i).GetActivatedItemId())
 			{
+				itemPoolQueue[item.itemNumber].add(item);
+				//System.out.println("activatedItemList 사이즈 : " + activatedItemList.size());
 				activatedItemList.remove(i);
 				break;
 			}
@@ -93,7 +148,9 @@ public class ItemManager
 			
 			if(item.IsTouchedHamster() == true)
 			{
+				System.out.println("햄스터 터치");
 				item.SetItemEffect();		//각각의 아이템들 마다 효과가 다르므로 자식 클래스에 재정의 해둠
+				ReturnItemToObjectPool(item);
 				break;
 			}
 			
