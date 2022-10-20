@@ -9,6 +9,8 @@ public class GameViewManager extends JPanel
 	
 	Image background;
 	Image hamster;
+	Image clock;
+	Image coin;
 	
 	
 	public GameViewManager()
@@ -17,6 +19,9 @@ public class GameViewManager extends JPanel
 		
 		background = Toolkit.getDefaultToolkit().getImage("background.png");
 		hamster = Toolkit.getDefaultToolkit().getImage("hamster.png");
+		clock = Toolkit.getDefaultToolkit().getImage("background.png");
+		coin = Toolkit.getDefaultToolkit().getImage("background.png");
+		
 		
 	}
 	

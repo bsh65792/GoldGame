@@ -17,6 +17,7 @@ public class GameManager extends JFrame
 	GameViewManager gameViewManager;
 	HamsterManager hamsterManager;
 	InputManager inputManager;
+	ItemManager itemManager;
 	
 	public GameManager()
 	{
@@ -25,6 +26,7 @@ public class GameManager extends JFrame
 		gameViewManager = new GameViewManager();
 		hamsterManager = new HamsterManager();
 		inputManager = new InputManager();
+		itemManager = new ItemManager();
 		
 		//아래 함수들은 JFrame에서 상속받은 함수로, 화면을 만들어 주는 함수인듯ㅋ
 		add("Center", gameViewManager);
