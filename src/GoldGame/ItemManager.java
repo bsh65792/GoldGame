@@ -12,8 +12,8 @@ public class ItemManager
 	ItemManager()
 	{
 		itemCount = 3;
-		
 		itemPoolQueue = new Queue[itemCount];
+		
 		for(int i = 0 ; i < itemCount ; i++)
 		{
 			itemPoolQueue[i] = new LinkedList<Item>();
@@ -60,7 +60,7 @@ public class ItemManager
 	private int NextActivatedItemId()
 	{
 		activatedItemId++;
-		if(activatedItemId >= 1000)
+		if(activatedItemId >= 1000)		//활성화된 아이템 id는 0~999까지 부여함
 		{
 			activatedItemId = 0;
 		}
@@ -72,13 +72,32 @@ public class ItemManager
 	//메인씬에서 부를꺼임
 	public void SetAllActivatedItemNextPosition()
 	{
-		
+		for(int i = 0 ; i < activatedItemList.size(); i++)
+		{
+			activatedItemList.get(i).SetNextPosition();
+		}
 	}
 	
-	//메인씬에서 부를꺼임
+	//모든 활성화된 아이템들을 검사. 바닥에 닿거나 햄스터에게 닿았는지 검사!!
 	public void CheckAllActivatedItemTouch()
 	{
-		
+		Item item;
+		for(int i = 0 ; i < activatedItemList.size(); i++)
+		{
+			item = activatedItemList.get(i);
+			if(item.IsTouchedBottom() == true)
+			{
+				ReturnItemToObjectPool(item);
+				break;
+			}
+			
+			if(item.IsTouchedHamster() == true)
+			{
+				item.SetItemEffect();		//각각의 아이템들 마다 효과가 다르므로 자식 클래스에 재정의 해둠
+				break;
+			}
+			
+		}
 	}
 	
 	
