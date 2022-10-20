@@ -13,6 +13,7 @@ public class GameViewManager extends JPanel
 	Image coinItemImage;
 	Image goldBarItemImage;
 	Image minusItemImage;
+	Image goldTheifItemImage;
 	
 	private final Font font = new Font("맑은 고딕", Font.BOLD | Font.ITALIC, 20);
 	
@@ -26,6 +27,8 @@ public class GameViewManager extends JPanel
 		coinItemImage = Toolkit.getDefaultToolkit().getImage("Coin.png");
 		goldBarItemImage = Toolkit.getDefaultToolkit().getImage("GoldBar.png");
 		minusItemImage = Toolkit.getDefaultToolkit().getImage("Theif.png");
+		goldTheifItemImage = Toolkit.getDefaultToolkit().getImage("GoldTheif.png");
+		
 		
 	}
 	
@@ -60,6 +63,9 @@ public class GameViewManager extends JPanel
 				break;
 			case 2:
 				g.drawImage(minusItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
+				break;
+			case 3:
+				g.drawImage(goldTheifItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
 				break;
 			default:
 				break;

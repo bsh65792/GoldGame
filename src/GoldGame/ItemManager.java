@@ -10,9 +10,7 @@ public class ItemManager
 	private Queue<Item>[] itemPoolQueue;
 	private int activatedItemId = -1;
 	
-	private int coinItemProbability = 50;
-	private int goldBarItemProbability = 25;
-	private int minusItemProbability = 25;
+	private float[] itemProbabilities = new float[4];
 	
 	private float remainItemTime;
 	
@@ -21,8 +19,13 @@ public class ItemManager
 	{
 		instance = this;
 		
+		itemProbabilities[0] = 50;
+		itemProbabilities[1] = 10;
+		itemProbabilities[2] = 39.7f;
+		itemProbabilities[3] = 0.3f;
+		
 		remainItemTime = 0;
-		itemCount = 3;		//아이템 총 세개임
+		itemCount = 4;		//아이템 총 세개임
 		itemPoolQueue = new Queue[itemCount];
 		
 		for(int i = 0 ; i < itemCount ; i++)
@@ -30,11 +33,12 @@ public class ItemManager
 			itemPoolQueue[i] = new LinkedList<Item>();
 		}
 		
-		for(int i = 0 ; i < 5000 ; i++)		//아이템을 미리 많이 만들어서 큐에 담아놓는다. 필요시 빼고 아이템이 사라져야할때 다시 넣음(오브젝트 풀링)
+		for(int i = 0 ; i < 100 ; i++)		//아이템을 미리 많이 만들어서 큐에 담아놓는다. 필요시 빼고 아이템이 사라져야할때 다시 넣음(오브젝트 풀링)
 		{
 			itemPoolQueue[0].add(new CoinItem());
 			itemPoolQueue[1].add(new GoldBarItem());
 			itemPoolQueue[2].add(new MinusItem());
+			itemPoolQueue[3].add(new GoldTheifItem());
 		}
 				
 	}
@@ -45,16 +49,15 @@ public class ItemManager
 		
 		if(remainItemTime <= 0f)
 		{
-			remainItemTime = 0.15f;			//아이템이 다시 떨어지기까지 걸리는 시간
+			remainItemTime = 0.09f;			//아이템이 다시 떨어지기까지 걸리는 시간
 			int choicedItemNumber = GetChoicedItemNumber();
 			
 			Item item = GetItemFromObjectPool(choicedItemNumber);
-			item.itemNumber = choicedItemNumber;
 			
 			float randomPosX = (float)Math.random() * 100f;
 			randomPosX *= GameManager.imageScaleRate;
 			
-			item.velocity = (float)Math.random() * 60f + 140f;
+			item.velocity = (float)Math.random() * 200f + 100f;
 			item.posX = randomPosX;
 			item.posY = -10 * GameManager.imageScaleRate;
 			
@@ -63,19 +66,23 @@ public class ItemManager
 	
 	private int GetChoicedItemNumber()
 	{
-		int randomNumber = (int)(Math.random() * 100);
+		float totalProbability = 0;
+		for(int i = 0 ; i < itemProbabilities.length ; i++)
+		{
+			totalProbability += itemProbabilities[i];
+		}
+		
+		float randomNumber = (float)(Math.random() * totalProbability);
 		int choicedItemNumber = 0;
-		if(randomNumber <= coinItemProbability)
+		
+		for(int i = 0; i < itemCount ; i++)
 		{
-			choicedItemNumber = 0;
-		}
-		else if(randomNumber - coinItemProbability <= goldBarItemProbability)
-		{
-			choicedItemNumber = 1;
-		}
-		else
-		{
-			choicedItemNumber = 2;
+			if(randomNumber <= itemProbabilities[i])
+			{
+				choicedItemNumber = i;
+				break;
+			}
+			randomNumber -= itemProbabilities[i];
 		}
 		
 		return choicedItemNumber;
@@ -148,7 +155,6 @@ public class ItemManager
 			
 			if(item.IsTouchedHamster() == true)
 			{
-				System.out.println("햄스터 터치");
 				item.SetItemEffect();		//각각의 아이템들 마다 효과가 다르므로 자식 클래스에 재정의 해둠
 				ReturnItemToObjectPool(item);
 				break;

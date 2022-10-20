@@ -4,8 +4,9 @@ public class MinusItem extends Item
 {
 	MinusItem()
 	{
-		scaleX = 10f * GameManager.imageScaleRate;
-		scaleY = 10f * GameManager.imageScaleRate;
+		itemNumber = 2;
+		scaleX = 13f * GameManager.imageScaleRate;
+		scaleY = 13f * GameManager.imageScaleRate;
 	}
 
 	public void SetItemEffect()
