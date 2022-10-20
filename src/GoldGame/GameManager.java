@@ -43,6 +43,10 @@ public class GameManager extends JFrame
 			while(true) {
 				InputManager.instance.CheckKeyInput();
 				
+				ItemManager.instance.TrySetItem();
+				ItemManager.instance.SetAllActivatedItemNextPosition();
+				ItemManager.instance.CheckAllActivatedItemTouch();
+				
 				//한 프레임을 지정해 주기 위해 deltaTime만큼 잠깐 스레드를 중지시킨다.(왜 try catch문을 써야 하는지는 모르겠음)
 				try
 				{
@@ -70,6 +74,12 @@ public class GameManager extends JFrame
 		{
 
 			TimeManager.instance.AddNowTime(deltaTime);
+			
+			
+			
+			
+			
+			
 			GameViewManager.instance.repaint();
 			
 			//한 프레임을 지정해 주기 위해 deltaTime만큼 잠깐 스레드를 중지시킨다.(왜 try catch문을 써야 하는지는 모르겠음)

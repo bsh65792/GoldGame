@@ -4,9 +4,15 @@ public abstract class Item
 {
 	private int activatedItemId;
 	
-	private float velocity;
-	private float posX;
-	private float posY;
+	public float velocity;
+	public float posX;
+	public float posY;
+	
+	public float scaleX;
+	public float scaleY;
+	
+	
+	public int itemNumber;
 	
 	
 	public abstract void SetItemEffect();
@@ -34,7 +40,7 @@ public abstract class Item
 	
 	public boolean IsTouchedBottom()
 	{
-		if(posY >= 230f)
+		if(posY >= 220f * GameManager.instance.imageScaleRate)
 		{
 			return true;
 		}
@@ -48,13 +54,16 @@ public abstract class Item
 	{
 		float hamsterPositionX = HamsterManager.instance.GetHamsterPositionX();
 		float hamsterPositionY = HamsterManager.instance.GetHamsterPositionY();
+		float hamsterScaleX = HamsterManager.instance.GetHamsterScaleX();
 		
+		float centerPosY = posY + scaleY / 2f;
+		float centerPosX = posX + scaleX / 2f;
 		
 		//y축 계산
-		if(hamsterPositionY <= posY && posY <= hamsterPositionY + 5f * GameManager.deltaTime)
+		if(hamsterPositionY <= centerPosY && centerPosY <= hamsterPositionY + 2f * GameManager.imageScaleRate)
 		{
 			//x축 계산
-			if(hamsterPositionX <= posX && posX <= hamsterPositionX + 5f * GameManager.deltaTime)
+			if(hamsterPositionX <= centerPosX && centerPosX <= hamsterPositionX + hamsterScaleX)
 			{
 				return true;
 			}

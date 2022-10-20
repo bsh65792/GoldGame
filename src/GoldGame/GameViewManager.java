@@ -10,7 +10,10 @@ public class GameViewManager extends JPanel
 	Image background;
 	Image hamster;
 	Image clock;
-	Image coin;
+	Image coinItemImage;
+	Image goldBarItemImage;
+	Image minusItemImage;
+	
 	private final Font font = new Font("맑은 고딕", Font.BOLD | Font.ITALIC, 20);
 	
 	public GameViewManager()
@@ -19,9 +22,10 @@ public class GameViewManager extends JPanel
 		
 		background = Toolkit.getDefaultToolkit().getImage("background.png");
 		hamster = Toolkit.getDefaultToolkit().getImage("hamster.png");
-		clock = Toolkit.getDefaultToolkit().getImage("background.png");
-		coin = Toolkit.getDefaultToolkit().getImage("background.png");
 		clock = Toolkit.getDefaultToolkit().getImage("GoldStageClock.png");
+		coinItemImage = Toolkit.getDefaultToolkit().getImage("Coin.png");
+		goldBarItemImage = Toolkit.getDefaultToolkit().getImage("GoldBar.png");
+		minusItemImage = Toolkit.getDefaultToolkit().getImage("Theif.png");
 		
 	}
 	
@@ -31,16 +35,41 @@ public class GameViewManager extends JPanel
 		//햄스터들의 좌표를 HamsterManager에서 불러옴
 		int hamsterPosX = HamsterManager.instance.GetHamsterPositionX();
 		int hamsterPosY = HamsterManager.instance.GetHamsterPositionY();
-		int hamsterScaleX = HamsterManager.instance.GetHamsterScaleX();
+		int hamsterScaleX = HamsterManager.instance.GetHamsterScaleX();	
 		int hamsterScaleY = HamsterManager.instance.GetHamsterScaleY();
 		g.setColor(Color.BLACK);
 		g.setFont(font);
 		
 		//이미지를 그림
 		g.drawImage(background, 0, 0, 120 * GameManager.imageScaleRate, 240 * GameManager.imageScaleRate, this);
+		
+		
+		
+		int activatedHamsterQuantity = ItemManager.instance.activatedItemList.size();
+		
+		for(int i = 0 ; i < activatedHamsterQuantity ; i++)
+		{
+			Item item = ItemManager.instance.activatedItemList.get(i);
+			switch(item.itemNumber)
+			{
+			case 0:
+				g.drawImage(coinItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
+				break;
+			case 1:
+				g.drawImage(goldBarItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
+				break;
+			case 2:
+				g.drawImage(minusItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
+				break;
+			default:
+				break;
+			}
+		}
+		
 		g.drawImage(hamster, hamsterPosX, hamsterPosY, hamsterScaleX, hamsterScaleY, this);
 		g.drawImage(clock, 80*GameManager.imageScaleRate, 10*GameManager.imageScaleRate, 20*GameManager.imageScaleRate, 20*GameManager.imageScaleRate, this);
 		g.drawString(""+ TimeManager.instance.GetNowTime()+ "", 82*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
+		
 	}
 }
 	
