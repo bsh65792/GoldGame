@@ -49,7 +49,7 @@ public class ItemManager
 			int choicedItemNumber = GetChoicedItemNumber();
 			
 			Item item = GetItemFromObjectPool(choicedItemNumber);
-			
+			//item.itemNumber
 			
 			float randomPosX = (float)Math.random() * 100f;
 			randomPosX *= GameManager.imageScaleRate;
@@ -63,7 +63,7 @@ public class ItemManager
 	
 	private int GetChoicedItemNumber()
 	{
-		int randomNumber = (int)Math.random() * 100;
+		int randomNumber = (int)(Math.random() * 100);
 		int choicedItemNumber = 0;
 		if(randomNumber <= coinItemProbability)
 		{
@@ -102,7 +102,8 @@ public class ItemManager
 		{
 			if(item.GetActivatedItemId() == activatedItemList.get(i).GetActivatedItemId())
 			{
-				System.out.println("activatedItemList 사이즈 : " + activatedItemList.size());
+				itemPoolQueue[item.itemNumber].add(item);
+				//System.out.println("activatedItemList 사이즈 : " + activatedItemList.size());
 				activatedItemList.remove(i);
 				break;
 			}

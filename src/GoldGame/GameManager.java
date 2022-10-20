@@ -17,6 +17,8 @@ public class GameManager extends JFrame
 	InputManager inputManager;
 	ItemManager itemManager;
 	TimeManager timeManager;
+	ScoreManager scoreManager;
+	SoundManager soundManager;
 	
 	public GameManager()
 	{
@@ -27,6 +29,8 @@ public class GameManager extends JFrame
 		inputManager = new InputManager();
 		itemManager = new ItemManager();
 		timeManager = new TimeManager();
+		scoreManager = new ScoreManager();
+//		soundManager = new SoundManager();
 		
 		//아래 함수들은 JFrame에서 상속받은 함수로, 화면을 만들어 주는 함수인듯ㅋ
 		add("Center", gameViewManager);
@@ -35,6 +39,7 @@ public class GameManager extends JFrame
 		addKeyListener(inputManager);
 		
 		(new CheckInputThread()).start();
+//    	soundManager.abc();
 	}
 	
 	
@@ -54,15 +59,11 @@ public class GameManager extends JFrame
 				}
 				catch(Exception e)
 				{
-					
 				}
 				
 			}
 		}
 	}
-	
-	
-	
 	
 	
 	public static void main(String[] args)
