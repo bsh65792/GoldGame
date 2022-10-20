@@ -73,12 +73,15 @@ public class GameManager extends JFrame
 		while(true)
 		{
 			InputManager.instance.CheckKeyInput();
-
 			TimeManager.instance.AddNowTime(deltaTime);
-			
 			ItemManager.instance.TrySetItem();
 			ItemManager.instance.SetAllActivatedItemNextPosition();
 			ItemManager.instance.CheckAllActivatedItemTouch();
+			if(TimeManager.instance.IsFinishedGame() == true) {
+				GameViewManager.instance.repaint();
+				break;
+			}
+					
 			
 			
 			GameViewManager.instance.repaint();

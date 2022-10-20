@@ -9,12 +9,18 @@ public class TimeManager
 	TimeManager()
 	{
 		instance = this;
-		nowTime = 50;
+		nowTime = 10;
 	}
 	
 	public void AddNowTime(float time)
 	{
-		nowTime -= time;
+		if(nowTime <= 0) {
+			nowTime = 0;
+			return;
+		}
+		else{
+			nowTime -= time;
+			}
 	}
 	
 	
@@ -26,11 +32,10 @@ public class TimeManager
 	
 	public boolean IsFinishedGame()
 	{
-		if(nowTime <= 0)
+		if(nowTime == 0)
 			return true;
 		
 		else
 			return false;
 	}
-
 }
