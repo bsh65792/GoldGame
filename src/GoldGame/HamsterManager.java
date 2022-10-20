@@ -52,13 +52,13 @@ public class HamsterManager
 	public void MoveLeft()
 	{
 		posX -= GameManager.instance.deltaTime * velocity;		//왼쪽으로 눈꼽만큼 움직임. but 매 프레임마다 움직이는 것이므로 많이 움직임!
-		GameViewManager.instance.DrawHamster();
+//		GameViewManager.instance.DrawHamster();   삭제 main에서 repaint() 호출
 	}
 	
 	public void MoveRight()
 	{
 		posX += GameManager.instance.deltaTime * velocity;
-		GameViewManager.instance.DrawHamster();
+//		GameViewManager.instance.DrawHamster();   삭제 main에서 repaint() 호출
 	}
 
 }

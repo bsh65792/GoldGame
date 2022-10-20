@@ -17,6 +17,7 @@ public class GameManager extends JFrame
 	GameViewManager gameViewManager;
 	HamsterManager hamsterManager;
 	InputManager inputManager;
+	TimeManager timeManager;
 	
 	public GameManager()
 	{
@@ -25,14 +26,36 @@ public class GameManager extends JFrame
 		gameViewManager = new GameViewManager();
 		hamsterManager = new HamsterManager();
 		inputManager = new InputManager();
+		timeManager = new TimeManager();
 		
 		//아래 함수들은 JFrame에서 상속받은 함수로, 화면을 만들어 주는 함수인듯ㅋ
 		add("Center", gameViewManager);
 		setSize(120 * imageScaleRate, 240 * imageScaleRate);
 		setVisible(true);
 		addKeyListener(inputManager);
+		
+		(new CheckInputThread()).start();
 	}
 	
+	
+	class CheckInputThread extends Thread{
+		public void run() {
+			while(true) {
+				InputManager.instance.CheckKeyInput();
+				
+				//한 프레임을 지정해 주기 위해 deltaTime만큼 잠깐 스레드를 중지시킨다.(왜 try catch문을 써야 하는지는 모르겠음)
+				try
+				{
+					Thread.sleep((int)(1000f * deltaTime));
+				}
+				catch(Exception e)
+				{
+					
+				}
+				
+			}
+		}
+	}
 	
 	
 	
@@ -42,13 +65,12 @@ public class GameManager extends JFrame
 	{
 		//gameManager 인스턴스 생성. 이때 생성자에서 모든 Manager 인스턴스가 함께 생성된다.
 		GameManager gameManager = new GameManager();
-		
+
 		while(true)
 		{
 
-			InputManager.instance.CheckKeyInput();
-			
-			
+			TimeManager.instance.AddNowTime(deltaTime);
+			GameViewManager.instance.repaint();
 			
 			//한 프레임을 지정해 주기 위해 deltaTime만큼 잠깐 스레드를 중지시킨다.(왜 try catch문을 써야 하는지는 모르겠음)
 			try
