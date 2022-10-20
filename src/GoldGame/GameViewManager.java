@@ -41,6 +41,7 @@ public class GameViewManager extends JPanel
 		g.drawImage(hamster, hamsterPosX, hamsterPosY, hamsterScaleX, hamsterScaleY, this);
 		g.drawImage(clock, 80*GameManager.imageScaleRate, 10*GameManager.imageScaleRate, 20*GameManager.imageScaleRate, 20*GameManager.imageScaleRate, this);
 		g.drawString(""+ TimeManager.instance.GetNowTime()+ "", 82*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
+		g.drawString("Score : "+ ScoreManager.instance.GetScore()+ "", 10*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
 	}
 }
 	
