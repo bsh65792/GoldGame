@@ -11,7 +11,7 @@ public class ItemManager
 	
 	ItemManager()
 	{
-		itemCount = 3;
+		itemCount = 3;		//아이템 총 세개임
 		itemPoolQueue = new Queue[itemCount];
 		
 		for(int i = 0 ; i < itemCount ; i++)
@@ -19,7 +19,7 @@ public class ItemManager
 			itemPoolQueue[i] = new LinkedList<Item>();
 		}
 		
-		for(int i = 0 ; i < 50 ; i++)
+		for(int i = 0 ; i < 50 ; i++)		//아이템을 미리 많이 만들어서 큐에 담아놓는다. 필요시 빼고 아이템이 사라져야할때 다시 넣음(오브젝트 풀링)
 		{
 			itemPoolQueue[0].add(new CoinItem());
 			itemPoolQueue[1].add(new GoldBarItem());
