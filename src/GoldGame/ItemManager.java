@@ -10,9 +10,9 @@ public class ItemManager
 	private Queue<Item>[] itemPoolQueue;
 	private int activatedItemId = -1;
 	
-	private int coinItemProbability = 60;
+	private int coinItemProbability = 50;
 	private int goldBarItemProbability = 25;
-	private int minusItemProbability = 15;
+	private int minusItemProbability = 25;
 	
 	private float remainItemTime;
 	
@@ -49,7 +49,7 @@ public class ItemManager
 			int choicedItemNumber = GetChoicedItemNumber();
 			
 			Item item = GetItemFromObjectPool(choicedItemNumber);
-			//item.itemNumber
+			item.itemNumber = choicedItemNumber;
 			
 			float randomPosX = (float)Math.random() * 100f;
 			randomPosX *= GameManager.imageScaleRate;
