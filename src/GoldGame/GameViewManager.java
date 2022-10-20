@@ -37,12 +37,12 @@ public class GameViewManager extends JPanel
 		int hamsterPosY = HamsterManager.instance.GetHamsterPositionY();
 		int hamsterScaleX = HamsterManager.instance.GetHamsterScaleX();	
 		int hamsterScaleY = HamsterManager.instance.GetHamsterScaleY();
+		float time;
 		g.setColor(Color.BLACK);
 		g.setFont(font);
 		
 		//이미지를 그림
 		g.drawImage(background, 0, 0, 120 * GameManager.imageScaleRate, 240 * GameManager.imageScaleRate, this);
-		
 		
 		
 		int activatedHamsterQuantity = ItemManager.instance.activatedItemList.size();
@@ -68,7 +68,8 @@ public class GameViewManager extends JPanel
 		
 		g.drawImage(hamster, hamsterPosX, hamsterPosY, hamsterScaleX, hamsterScaleY, this);
 		g.drawImage(clock, 80*GameManager.imageScaleRate, 10*GameManager.imageScaleRate, 20*GameManager.imageScaleRate, 20*GameManager.imageScaleRate, this);
-		g.drawString(""+ TimeManager.instance.GetNowTime()+ "", 82*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
+		time = (float) (Math.round((TimeManager.instance.GetNowTime()) * 100) / 100.0);
+		g.drawString(""+ time + "", 83*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
 		g.drawString("Score : "+ ScoreManager.instance.GetScore()+ "", 10*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
 
 	}
