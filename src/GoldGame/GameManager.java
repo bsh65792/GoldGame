@@ -38,19 +38,17 @@ public class GameManager extends JFrame
 		setVisible(true);
 		addKeyListener(inputManager);
 		
-		(new CheckInputThread()).start();
+		//(new CheckInputThread()).start();
 //    	soundManager.abc();
 	}
 	
 	
-	class CheckInputThread extends Thread{
+	/*class CheckInputThread extends Thread{
 		public void run() {
 			while(true) {
-				InputManager.instance.CheckKeyInput();
+				//InputManager.instance.CheckKeyInput();
 				
-				ItemManager.instance.TrySetItem();
-				ItemManager.instance.SetAllActivatedItemNextPosition();
-				ItemManager.instance.CheckAllActivatedItemTouch();
+				
 				
 				//한 프레임을 지정해 주기 위해 deltaTime만큼 잠깐 스레드를 중지시킨다.(왜 try catch문을 써야 하는지는 모르겠음)
 				try
@@ -63,7 +61,7 @@ public class GameManager extends JFrame
 				
 			}
 		}
-	}
+	}*/
 	
 	
 	public static void main(String[] args)
@@ -73,11 +71,14 @@ public class GameManager extends JFrame
 
 		while(true)
 		{
+			InputManager.instance.CheckKeyInput();
 
 			TimeManager.instance.AddNowTime(deltaTime);
 			
 			
-			
+			ItemManager.instance.TrySetItem();
+			ItemManager.instance.SetAllActivatedItemNextPosition();
+			ItemManager.instance.CheckAllActivatedItemTouch();
 			
 			
 			
