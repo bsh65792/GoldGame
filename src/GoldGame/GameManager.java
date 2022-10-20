@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class GameManager extends JFrame
 {
 	public static GameManager instance;				//싱글턴 패턴 적용(GameManager에서 생성한 gameManager 객체는 단 하나만 존재하며, 그 객체를 static 변수로 지정하면 어떠한 곳에서도 그 객체를 가리킬 수 있음!)
-	public static final float deltaTime = 1f/60f;	//한 frame당 흘러간 시간
+	public static final float deltaTime = 1f/120f;	//한 frame당 흘러간 시간
 	
 	public static int imageScaleRate = 3;			//image 이동 및 배치, 크기조절 등에 모두 곱해주어서 혹시라도 화면크기를 조정해야 할 때 해당 변수 하나만 바꿔줄 수 있도록 static으로 지정함
 	
@@ -57,6 +57,7 @@ public class GameManager extends JFrame
 				}
 				catch(Exception e)
 				{
+					
 				}
 				
 			}
@@ -75,11 +76,9 @@ public class GameManager extends JFrame
 
 			TimeManager.instance.AddNowTime(deltaTime);
 			
-			
 			ItemManager.instance.TrySetItem();
 			ItemManager.instance.SetAllActivatedItemNextPosition();
 			ItemManager.instance.CheckAllActivatedItemTouch();
-			
 			
 			
 			GameViewManager.instance.repaint();

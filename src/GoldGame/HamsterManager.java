@@ -21,11 +21,11 @@ public class HamsterManager
 		posX = 40 * GameManager.imageScaleRate;
 		posY = 190 * GameManager.imageScaleRate;
 		
-		scaleX = 45 * GameManager.imageScaleRate * 0.7f;
-		scaleY = 47 * GameManager.imageScaleRate * 0.7f;
+		scaleX = 45 * GameManager.imageScaleRate * 0.5f;
+		scaleY = 47 * GameManager.imageScaleRate * 0.5f;
 		
 		//햄스터 이동 속도. 1초당 140픽셀씩 이동한다. float로 한 이유는 10프레임에 1픽셀이 이동하거나 할 경우도 있기 때문이고, 화면에 그려줄 때는 int로 캐스팅함.
-		velocity = 140f;
+		velocity = 210f;
 	}
 	
 	public int GetHamsterPositionX()
