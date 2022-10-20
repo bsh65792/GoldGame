@@ -10,8 +10,8 @@ public class GameViewManager extends JPanel
 	Image background;
 	Image hamster;
 	Image clock;
+	Image coin;
 	private final Font font = new Font("맑은 고딕", Font.BOLD | Font.ITALIC, 20);
-	
 	
 	public GameViewManager()
 	{
@@ -19,6 +19,8 @@ public class GameViewManager extends JPanel
 		
 		background = Toolkit.getDefaultToolkit().getImage("background.png");
 		hamster = Toolkit.getDefaultToolkit().getImage("hamster.png");
+		clock = Toolkit.getDefaultToolkit().getImage("background.png");
+		coin = Toolkit.getDefaultToolkit().getImage("background.png");
 		clock = Toolkit.getDefaultToolkit().getImage("GoldStageClock.png");
 		
 	}

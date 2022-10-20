@@ -11,12 +11,11 @@ public class GameManager extends JFrame
 	
 	public static int imageScaleRate = 3;			//image 이동 및 배치, 크기조절 등에 모두 곱해주어서 혹시라도 화면크기를 조정해야 할 때 해당 변수 하나만 바꿔줄 수 있도록 static으로 지정함
 	
-	
-	
 	//아래 클래스들은 이 sw에서 단 하나의 객체만 생성될 것이므로 gameManager 인스턴스 생성할 때 같이 생성해줌
 	GameViewManager gameViewManager;
 	HamsterManager hamsterManager;
 	InputManager inputManager;
+	ItemManager itemManager;
 	TimeManager timeManager;
 	
 	public GameManager()
@@ -26,6 +25,7 @@ public class GameManager extends JFrame
 		gameViewManager = new GameViewManager();
 		hamsterManager = new HamsterManager();
 		inputManager = new InputManager();
+		itemManager = new ItemManager();
 		timeManager = new TimeManager();
 		
 		//아래 함수들은 JFrame에서 상속받은 함수로, 화면을 만들어 주는 함수인듯ㅋ
