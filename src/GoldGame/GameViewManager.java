@@ -14,6 +14,8 @@ public class GameViewManager extends JPanel
 	Image goldBarItemImage;
 	Image minusItemImage;
 	Image goldTheifItemImage;
+	Image fastItemImage;
+	Image slowItemImage;
 	
 	Image[] cloudImages = new Image[10];
 	
@@ -30,6 +32,8 @@ public class GameViewManager extends JPanel
 		goldBarItemImage = Toolkit.getDefaultToolkit().getImage("GoldBar.png");
 		minusItemImage = Toolkit.getDefaultToolkit().getImage("Theif.png");
 		goldTheifItemImage = Toolkit.getDefaultToolkit().getImage("GoldTheif.png");
+		fastItemImage = Toolkit.getDefaultToolkit().getImage("FastItem.png");
+		slowItemImage = Toolkit.getDefaultToolkit().getImage("SlowItem.png");
 		
 		for(int i = 0 ; i < 10 ; i++)
 		{
@@ -86,6 +90,12 @@ public class GameViewManager extends JPanel
 				break;
 			case 3:
 				g.drawImage(goldTheifItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
+				break;
+			case 5:
+				g.drawImage(fastItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
+				break;
+			case 6:
+				g.drawImage(slowItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
 				break;
 			default:
 				break;

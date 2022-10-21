@@ -10,9 +10,12 @@ public class ItemManager
 	private Queue<Item>[] itemPoolQueue;
 	private int activatedItemId = -1;
 	
-	private float[] itemProbabilities = new float[4];
+	private float[] itemProbabilities = new float[6];
 	
 	private float remainItemTime;
+	
+	public float fastItemTime = -1f;
+	public float slowItemTime = -1f;
 	
 	
 	ItemManager()
@@ -23,10 +26,13 @@ public class ItemManager
 		itemProbabilities[1] = 10;
 		itemProbabilities[2] = 39.7f;
 		itemProbabilities[3] = 0.8f;
+		itemProbabilities[4] = 3f;
+		itemProbabilities[5] = 3f;
 		
 		remainItemTime = 0;
 		itemCount = 4;		//아이템 총 세개임
 		itemPoolQueue = new Queue[itemCount];
+		
 		
 		for(int i = 0 ; i < itemCount ; i++)
 		{
@@ -39,6 +45,8 @@ public class ItemManager
 			itemPoolQueue[1].add(new GoldBarItem());
 			itemPoolQueue[2].add(new MinusItem());
 			itemPoolQueue[3].add(new GoldTheifItem());
+			itemPoolQueue[4].add(new FastItem());
+			itemPoolQueue[5].add(new SlowItem());
 		}
 				
 	}
@@ -160,6 +168,20 @@ public class ItemManager
 				break;
 			}
 			
+		}
+	}
+	
+	public void SetSpeedItem()
+	{
+		if(fastItemTime > 0f && slowItemTime <= 0f)
+		{
+			fastItemTime -= GameManager.deltaTime;
+			
+		}
+		
+		if(slowItemTime > 0f && fastItemTime <= 0f)
+		{
+			slowItemTime -= GameManager.deltaTime;
 		}
 	}
 	

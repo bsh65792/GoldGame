@@ -85,6 +85,7 @@ public class GameManager extends JFrame
 			ItemManager.instance.TrySetItem();
 			ItemManager.instance.SetAllActivatedItemNextPosition();
 			ItemManager.instance.CheckAllActivatedItemTouch();
+			ItemManager.instance.SetSpeedItem();
 			
 			HamsterManager.instance.SetWalkAnimation();
 			
