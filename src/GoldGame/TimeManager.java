@@ -9,7 +9,7 @@ public class TimeManager
 	TimeManager()
 	{
 		instance = this;
-		nowTime = 10;
+		nowTime = 20;
 	}
 	
 	public void AddNowTime(float time)
