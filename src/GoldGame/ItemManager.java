@@ -10,27 +10,34 @@ public class ItemManager
 	private Queue<Item>[] itemPoolQueue;
 	private int activatedItemId = -1;
 	
-	private float[] itemProbabilities = new float[6];
+	private float[] itemProbabilities;
 	
 	private float remainItemTime;
 	
 	public float fastItemTime = -1f;
 	public float slowItemTime = -1f;
 	
+	public SpeedArrow speedArrow;
+	
 	
 	ItemManager()
 	{
 		instance = this;
+		itemCount = 7;		//아이템 총 세개임
 		
-		itemProbabilities[0] = 50;
-		itemProbabilities[1] = 10;
-		itemProbabilities[2] = 39.7f;
-		itemProbabilities[3] = 0.8f;
-		itemProbabilities[4] = 3f;
+		itemProbabilities = new float[itemCount];
+		
+		itemProbabilities[0] = 50;		//코인  (+1점)
+		itemProbabilities[1] = 10;		//골드바 (+5점)
+		itemProbabilities[2] = 30f;		//도둑햄구(-5점)
+		itemProbabilities[3] = 0.5f;	//황금햄구(모든 도둑햄구가 골드바로 바뀜)
+		itemProbabilities[4] = 0.5f;	//시간 증가
 		itemProbabilities[5] = 3f;
+		itemProbabilities[6] = 3f;
+
 		
 		remainItemTime = 0;
-		itemCount = 4;		//아이템 총 세개임
+		
 		itemPoolQueue = new Queue[itemCount];
 		
 		
@@ -45,10 +52,13 @@ public class ItemManager
 			itemPoolQueue[1].add(new GoldBarItem());
 			itemPoolQueue[2].add(new MinusItem());
 			itemPoolQueue[3].add(new GoldTheifItem());
-			itemPoolQueue[4].add(new FastItem());
-			itemPoolQueue[5].add(new SlowItem());
+			itemPoolQueue[4].add(new TimePlusItem());
+			itemPoolQueue[5].add(new FastItem());
+			itemPoolQueue[6].add(new SlowItem());
+
 		}
-				
+		
+		speedArrow = new SpeedArrow();
 	}
 	
 	public void TrySetItem()
@@ -104,6 +114,10 @@ public class ItemManager
 		item.SetActivatedItemId(NextActivatedItemId());			//아이템의 ID값 부여
 		activatedItemList.add(item);							//현재 맵에 보이는 활성화된 아이템들을 관리하는 리스트
 		
+		if(item.itemNumber == 5)
+		{
+			System.out.println("FastItem 꺼내옴!");
+		}
 		return item;
 	}
 	
@@ -173,15 +187,94 @@ public class ItemManager
 	
 	public void SetSpeedItem()
 	{
+		SetSpeedArrowShaking();
+		
 		if(fastItemTime > 0f && slowItemTime <= 0f)
 		{
 			fastItemTime -= GameManager.deltaTime;
+			HamsterManager.instance.velocity = HamsterManager.instance.fastVelocity;
+			HamsterManager.instance.walkTime = 0.05f;
+			SetFastArrow();
+			
+		}
+		else if(slowItemTime > 0f && fastItemTime <= 0f)
+		{
+			slowItemTime -= GameManager.deltaTime;
+			HamsterManager.instance.velocity = HamsterManager.instance.slowVelocity;
+			HamsterManager.instance.walkTime = 0.35f;
+			SetSlowArrow();
+		}
+		else
+		{
+			HamsterManager.instance.velocity = HamsterManager.instance.normalVelocity;
+			HamsterManager.instance.walkTime = 0.1f;
+			HideSpeedArrow();
+		}
+	}
+	
+	
+	float fastArrowDefaultTime = 0.3f;
+	float fastArrowTime = fastArrowDefaultTime;
+	float fastArrowState = 1;
+	
+	float slowArrowDefaultTime = 0.3f;
+	float slowArrowTime = fastArrowDefaultTime;
+	float slowArrowState = 1;
+	
+	void SetFastArrow()
+	{
+		speedArrow.fastArrowPosX = HamsterManager.instance.GetHamsterPositionX() + HamsterManager.instance.GetHamsterScaleX();
+		speedArrow.slowArrowPosX = 10000f;
+	}
+	
+	void SetSlowArrow()
+	{
+		speedArrow.fastArrowPosX = 10000f;
+		speedArrow.slowArrowPosX = HamsterManager.instance.GetHamsterPositionX() + HamsterManager.instance.GetHamsterScaleX();
+	}
+	
+	void HideSpeedArrow()
+	{
+		speedArrow.fastArrowPosX = 10000f;
+		speedArrow.slowArrowPosX = 10000f;
+	}
+	
+	void SetSpeedArrowShaking()
+	{
+		fastArrowTime -= GameManager.deltaTime;
+		if(fastArrowTime <= 0f)
+		{
+			if(fastArrowState == 1)
+			{
+				fastArrowTime = fastArrowDefaultTime;
+				fastArrowState = 2;
+				speedArrow.fastArrowPosY = HamsterManager.instance.GetHamsterPositionY() - 2 * GameManager.imageScaleRate + HamsterManager.instance.GetHamsterScaleY()/2 - speedArrow.scaleY / 2f;
+			}
+			else
+			{
+				fastArrowTime = fastArrowDefaultTime;
+				fastArrowState = 1;
+				speedArrow.fastArrowPosY = HamsterManager.instance.GetHamsterPositionY() + 2 * GameManager.imageScaleRate + HamsterManager.instance.GetHamsterScaleY()/2 - speedArrow.scaleY / 2f;
+			}
 			
 		}
 		
-		if(slowItemTime > 0f && fastItemTime <= 0f)
+		slowArrowTime -= GameManager.deltaTime;
+		if(slowArrowTime <= 0f)
 		{
-			slowItemTime -= GameManager.deltaTime;
+			if(slowArrowState == 1)
+			{
+				slowArrowTime = slowArrowDefaultTime;
+				slowArrowState = 2;
+				speedArrow.slowArrowPosY = HamsterManager.instance.GetHamsterPositionY() - 2 * GameManager.imageScaleRate + HamsterManager.instance.GetHamsterScaleY()/2 - speedArrow.scaleY / 2f;
+			}
+			else
+			{
+				slowArrowTime = slowArrowDefaultTime;
+				slowArrowState = 1;
+				speedArrow.slowArrowPosY = HamsterManager.instance.GetHamsterPositionY() + 2 * GameManager.imageScaleRate + HamsterManager.instance.GetHamsterScaleY()/2 - speedArrow.scaleY / 2f;
+			}
+			
 		}
 	}
 	

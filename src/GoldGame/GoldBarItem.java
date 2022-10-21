@@ -6,8 +6,8 @@ public class GoldBarItem extends Item
 	GoldBarItem()
 	{
 		itemNumber = 1;
-		scaleX = 13f * GameManager.imageScaleRate;
-		scaleY = 10f * GameManager.imageScaleRate;
+		scaleX = 13f * GameManager.imageScaleRate * 0.8f;
+		scaleY = 10f * GameManager.imageScaleRate * 0.8f;
 	}
 
 	public void SetItemEffect()

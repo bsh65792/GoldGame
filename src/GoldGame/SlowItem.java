@@ -5,9 +5,9 @@ public class SlowItem extends Item
 	
 	SlowItem()
 	{
-		itemNumber = 0;
-		scaleX = 10f * GameManager.imageScaleRate;
-		scaleY = 10f * GameManager.imageScaleRate;
+		itemNumber = 6;
+		scaleX = 8f * GameManager.imageScaleRate;
+		scaleY = 8f * GameManager.imageScaleRate;
 	}
 	
 	

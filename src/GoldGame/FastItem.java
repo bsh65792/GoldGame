@@ -4,9 +4,9 @@ public class FastItem extends Item
 {
 	FastItem()
 	{
-		itemNumber = 0;
-		scaleX = 10f * GameManager.imageScaleRate;
-		scaleY = 10f * GameManager.imageScaleRate;
+		itemNumber = 5;
+		scaleX = 8f * GameManager.imageScaleRate;
+		scaleY = 8f * GameManager.imageScaleRate;
 	}
 	
 	

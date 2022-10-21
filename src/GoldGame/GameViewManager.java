@@ -14,11 +14,16 @@ public class GameViewManager extends JPanel
 	Image goldBarItemImage;
 	Image minusItemImage;
 	Image goldTheifItemImage;
+	Image timePlusItemImage;
 	Image fastItemImage;
 	Image slowItemImage;
 	
-	Image[] cloudImages = new Image[10];
+	Image fastArrowImage;
+	Image slowArrowImage;
 	
+	Image[] cloudImages = new Image[10];
+
+
 	private final Font font = new Font("맑은 고딕", Font.BOLD | Font.ITALIC, 20);
 	
 	public GameViewManager()
@@ -34,11 +39,16 @@ public class GameViewManager extends JPanel
 		goldTheifItemImage = Toolkit.getDefaultToolkit().getImage("GoldTheif.png");
 		fastItemImage = Toolkit.getDefaultToolkit().getImage("FastItem.png");
 		slowItemImage = Toolkit.getDefaultToolkit().getImage("SlowItem.png");
+		timePlusItemImage = Toolkit.getDefaultToolkit().getImage("TimePlusItem.png");
+		fastArrowImage = Toolkit.getDefaultToolkit().getImage("FastArrow.png");
+		slowArrowImage = Toolkit.getDefaultToolkit().getImage("SlowArrow.png");
 		
 		for(int i = 0 ; i < 10 ; i++)
 		{
 			cloudImages[i] = Toolkit.getDefaultToolkit().getImage("Cloud_" + i + ".png");
 		}
+		
+
 		
 	}
 	
@@ -91,12 +101,15 @@ public class GameViewManager extends JPanel
 			case 3:
 				g.drawImage(goldTheifItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
 				break;
+			case 4:
+				g.drawImage(timePlusItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
+				break;
 			case 5:
 				g.drawImage(fastItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
 				break;
 			case 6:
 				g.drawImage(slowItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
-				break;
+
 			default:
 				break;
 			}
@@ -110,11 +123,17 @@ public class GameViewManager extends JPanel
 		{
 			g.drawImage(hamster, hamsterPosX, hamsterPosY, hamsterScaleX, hamsterScaleY, this);
 		}
+		g.drawImage(fastArrowImage, (int)SpeedArrow.instance.fastArrowPosX, (int)SpeedArrow.instance.fastArrowPosY, (int)SpeedArrow.instance.scaleX, (int)SpeedArrow.instance.scaleY, this);
+		g.drawImage(slowArrowImage, (int)SpeedArrow.instance.slowArrowPosX, (int)SpeedArrow.instance.slowArrowPosY, (int)SpeedArrow.instance.scaleX, (int)SpeedArrow.instance.scaleY, this);
 		
 		g.drawImage(clock, 80*GameManager.imageScaleRate, 8*GameManager.imageScaleRate, 25*GameManager.imageScaleRate, 25*GameManager.imageScaleRate, this);
 		time = (float) (Math.round((TimeManager.instance.GetNowTime()) * 100) / 100.0);
 		g.drawString(""+ time + "", TimeManager.instance.timePosX, TimeManager.instance.timePosY);
 		g.drawString("Score : "+ ScoreManager.instance.GetScore()+ "", 10*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
+		
+		if(TimeManager.instance.IsFinishedGame() == true) {
+			g.drawString("Game Over", 40*GameManager.imageScaleRate, 120*GameManager.imageScaleRate);
+		}
 
 	}
 	
