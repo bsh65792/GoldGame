@@ -15,6 +15,8 @@ public class GameViewManager extends JPanel
 	Image minusItemImage;
 	Image goldTheifItemImage;
 	
+	Image[] cloudImages = new Image[10];
+	
 	private final Font font = new Font("맑은 고딕", Font.BOLD | Font.ITALIC, 20);
 	
 	public GameViewManager()
@@ -28,6 +30,11 @@ public class GameViewManager extends JPanel
 		goldBarItemImage = Toolkit.getDefaultToolkit().getImage("GoldBar.png");
 		minusItemImage = Toolkit.getDefaultToolkit().getImage("Theif.png");
 		goldTheifItemImage = Toolkit.getDefaultToolkit().getImage("GoldTheif.png");
+		
+		for(int i = 0 ; i < 10 ; i++)
+		{
+			cloudImages[i] = Toolkit.getDefaultToolkit().getImage("Cloud_" + i + ".png");
+		}
 		
 	}
 	
@@ -45,6 +52,12 @@ public class GameViewManager extends JPanel
 		
 		//이미지를 그림
 		g.drawImage(background, 0, 0, 120 * GameManager.imageScaleRate, 240 * GameManager.imageScaleRate, this);
+		
+		for(int i = 0 ; i < CloudManager.instance.cloudList.size(); i++)
+		{
+			Cloud cloud = CloudManager.instance.cloudList.get(i);
+			g.drawImage(cloudImages[cloud.cloudType], (int)cloud.posX, (int)cloud.posY, (int)cloud.scaleX, (int)cloud.scaleY, this);
+		}
 		
 		
 		int activatedHamsterQuantity = ItemManager.instance.activatedItemList.size();

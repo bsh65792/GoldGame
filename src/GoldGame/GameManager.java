@@ -88,6 +88,8 @@ public class GameManager extends JFrame
 			
 			HamsterManager.instance.SetWalkAnimation();
 			
+			CloudManager.instance.SetCloud();
+			
 			if(TimeManager.instance.IsFinishedGame() == true) {
 				GameViewManager.instance.repaint();
 				break;

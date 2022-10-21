@@ -11,6 +11,11 @@ public class Cloud
 	
 	public int cloudType;
 	
+	Cloud()
+	{
+		scaleX = 50 * GameManager.imageScaleRate;
+		scaleY = 50 * GameManager.imageScaleRate;
+	}
 	
 	
 	public void MoveRight()
@@ -20,7 +25,7 @@ public class Cloud
 	
 	public boolean ShouldRemoveCloud()
 	{
-		if(posX >= 240 * GameManager.imageScaleRate)
+		if(posX >= 120 * GameManager.imageScaleRate)
 		{
 			return true;
 		}

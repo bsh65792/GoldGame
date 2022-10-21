@@ -14,8 +14,8 @@ public class TimeManager
 		instance = this;
 		
 		nowTime = 50;
-		timePosX = 83 * GameManager.imageScaleRate;
-		timePosY = 22 * GameManager.imageScaleRate;
+		timePosX = 85 * GameManager.imageScaleRate;
+		timePosY = 23 * GameManager.imageScaleRate;
 	}
 	
 	public void AddNowTime(float time)
@@ -33,15 +33,15 @@ public class TimeManager
 	{
 		if(nowTime >= 10f)
 		{
-			timePosX = 83 * GameManager.imageScaleRate;
+			timePosX = 85 * GameManager.imageScaleRate;
 		}
 		else if(nowTime >0f)
 		{
-			timePosX = 85 * GameManager.imageScaleRate;
+			timePosX = 87 * GameManager.imageScaleRate;
 		}
 		else
 		{
-			timePosX = 88 * GameManager.imageScaleRate;
+			timePosX = 89 * GameManager.imageScaleRate;
 		}
 	}
 	
