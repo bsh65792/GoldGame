@@ -35,6 +35,7 @@ public class InputManager implements KeyListener
     	{
     		//System.out.println("VK_LEFT");
     		isLeftPressed = true;					//왼쪽 눌러졌다고 필드값 수정함(매 프레임마다 main()에서 이 값을 체크해서 햄스터에게 움직여라고 명령을 내릴지 말지 판단함) 
+    		HamsterManager.instance.isReverseHamster = false;		//햄스터 반전
     		
     	}
     	
@@ -42,6 +43,7 @@ public class InputManager implements KeyListener
     	{
     		//System.out.println("VK_RIGHT");
     		isRightPressed = true;
+    		HamsterManager.instance.isReverseHamster = true;		//햄스터 반전
     	}
     }
     

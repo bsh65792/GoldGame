@@ -29,7 +29,6 @@ public class GameViewManager extends JPanel
 		minusItemImage = Toolkit.getDefaultToolkit().getImage("Theif.png");
 		goldTheifItemImage = Toolkit.getDefaultToolkit().getImage("GoldTheif.png");
 		
-		
 	}
 	
 	//화면에 이미지들을 그리는 메소드
@@ -72,13 +71,35 @@ public class GameViewManager extends JPanel
 			}
 		}
 		
-		g.drawImage(hamster, hamsterPosX, hamsterPosY, hamsterScaleX, hamsterScaleY, this);
-		g.drawImage(clock, 80*GameManager.imageScaleRate, 10*GameManager.imageScaleRate, 20*GameManager.imageScaleRate, 20*GameManager.imageScaleRate, this);
+		if(HamsterManager.instance.isReverseHamster == true)
+		{
+			g.drawImage(hamster, hamsterPosX + hamsterScaleX, hamsterPosY, -hamsterScaleX, hamsterScaleY, this);
+		}
+		else
+		{
+			g.drawImage(hamster, hamsterPosX, hamsterPosY, hamsterScaleX, hamsterScaleY, this);
+		}
+		
+		g.drawImage(clock, 80*GameManager.imageScaleRate, 8*GameManager.imageScaleRate, 25*GameManager.imageScaleRate, 25*GameManager.imageScaleRate, this);
 		time = (float) (Math.round((TimeManager.instance.GetNowTime()) * 100) / 100.0);
 		g.drawString(""+ time + "", 83*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
 		g.drawString("Score : "+ ScoreManager.instance.GetScore()+ "", 10*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
 
 	}
+	
+	public void SetHamsterIdleImage()
+	{
+		hamster = Toolkit.getDefaultToolkit().getImage("hamster.png");
+	}
+	public void SetHamsterWalk_1Image()
+	{
+		hamster = Toolkit.getDefaultToolkit().getImage("hamsterWalk_1.png");
+	}
+	public void SetHamsterWalk_2Image()
+	{
+		hamster = Toolkit.getDefaultToolkit().getImage("hamsterWalk_2.png");
+	}
+	
 }
 	
 /*	public void DrawHamster()

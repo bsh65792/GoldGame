@@ -22,7 +22,7 @@ public class ItemManager
 		itemProbabilities[0] = 50;
 		itemProbabilities[1] = 10;
 		itemProbabilities[2] = 39.7f;
-		itemProbabilities[3] = 0.3f;
+		itemProbabilities[3] = 0.8f;
 		
 		remainItemTime = 0;
 		itemCount = 4;		//아이템 총 세개임

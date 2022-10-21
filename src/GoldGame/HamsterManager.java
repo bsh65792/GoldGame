@@ -4,6 +4,7 @@ public class HamsterManager
 {
 	public static HamsterManager instance;
 	
+	public boolean isReverseHamster;
 	private float posX;
 	private final float posY;
 	
@@ -15,6 +16,7 @@ public class HamsterManager
 	HamsterManager()
 	{
 		instance = this;
+		isReverseHamster = false;
 		
 		
 		//처음 위치와 크기 지정
