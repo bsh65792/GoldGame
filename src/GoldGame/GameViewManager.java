@@ -51,7 +51,15 @@ public class GameViewManager extends JPanel
 		
 		for(int i = 0 ; i < activatedHamsterQuantity ; i++)
 		{
-			Item item = ItemManager.instance.activatedItemList.get(i);
+			Item item;
+			
+			if(ItemManager.instance.activatedItemList.get(i) == null)
+			{
+				continue;
+			}
+			
+			item = ItemManager.instance.activatedItemList.get(i);
+			
 			switch(item.itemNumber)
 			{
 			case 0:

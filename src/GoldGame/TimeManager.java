@@ -13,7 +13,7 @@ public class TimeManager
 	{
 		instance = this;
 		
-		nowTime = 5;
+		nowTime = 50;
 		timePosX = 83 * GameManager.imageScaleRate;
 		timePosY = 22 * GameManager.imageScaleRate;
 	}
