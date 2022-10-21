@@ -9,7 +9,7 @@ public class GameManager extends JFrame
 	public static GameManager instance;				//싱글턴 패턴 적용(GameManager에서 생성한 gameManager 객체는 단 하나만 존재하며, 그 객체를 static 변수로 지정하면 어떠한 곳에서도 그 객체를 가리킬 수 있음!)
 	public static final float deltaTime = 1f/120f;	//한 frame당 흘러간 시간
 	
-	public static int imageScaleRate = 3;			//image 이동 및 배치, 크기조절 등에 모두 곱해주어서 혹시라도 화면크기를 조정해야 할 때 해당 변수 하나만 바꿔줄 수 있도록 static으로 지정함
+	public static int imageScaleRate = 4;			//image 이동 및 배치, 크기조절 등에 모두 곱해주어서 혹시라도 화면크기를 조정해야 할 때 해당 변수 하나만 바꿔줄 수 있도록 static으로 지정함
 	
 	//아래 클래스들은 이 sw에서 단 하나의 객체만 생성될 것이므로 gameManager 인스턴스 생성할 때 같이 생성해줌
 	GameViewManager gameViewManager;
@@ -19,6 +19,7 @@ public class GameManager extends JFrame
 	TimeManager timeManager;
 	ScoreManager scoreManager;
 	SoundManager soundManager;
+	CloudManager cloudManager;
 	
 	public GameManager()
 	{
@@ -31,6 +32,7 @@ public class GameManager extends JFrame
 		timeManager = new TimeManager();
 		scoreManager = new ScoreManager();
 //		soundManager = new SoundManager();
+		cloudManager = new CloudManager();
 		
 		//아래 함수들은 JFrame에서 상속받은 함수로, 화면을 만들어 주는 함수인듯ㅋ
 		add("Center", gameViewManager);
@@ -83,8 +85,11 @@ public class GameManager extends JFrame
 			ItemManager.instance.TrySetItem();
 			ItemManager.instance.SetAllActivatedItemNextPosition();
 			ItemManager.instance.CheckAllActivatedItemTouch();
+			ItemManager.instance.SetSpeedItem();
 			
 			HamsterManager.instance.SetWalkAnimation();
+			
+			CloudManager.instance.SetCloud();
 			
 			if(TimeManager.instance.IsFinishedGame() == true) {
 				GameViewManager.instance.repaint();

@@ -11,11 +11,14 @@ public class HamsterManager
 	private final float scaleX;
 	private final float scaleY;
 	
-	private float velocity;
+	public float velocity;
+	public final float normalVelocity = 210f;
+	public final float fastVelocity = 370f;
+	public final float slowVelocity = 90f;
 	
 	private int walkAnimationNumber = 1;
 	private float nowWalkTime;
-	private final float walkTime = 0.1f;
+	public float walkTime = 0.1f;
 	
 	HamsterManager()
 	{
@@ -24,14 +27,15 @@ public class HamsterManager
 		
 		
 		//처음 위치와 크기 지정
-		posX = 40 * GameManager.imageScaleRate;
-		posY = 190 * GameManager.imageScaleRate;
-		
+
 		scaleX = 45 * GameManager.imageScaleRate * 0.5f;
 		scaleY = 47 * GameManager.imageScaleRate * 0.5f;
 		
+		posX = 60 * GameManager.imageScaleRate - scaleX / 2f;
+		posY = 220 * GameManager.imageScaleRate - scaleY;
+		
 		//햄스터 이동 속도. 1초당 140픽셀씩 이동한다. float로 한 이유는 10프레임에 1픽셀이 이동하거나 할 경우도 있기 때문이고, 화면에 그려줄 때는 int로 캐스팅함.
-		velocity = 210f;
+		velocity = normalVelocity;
 		nowWalkTime = walkTime;
 	}
 	
@@ -76,6 +80,7 @@ public class HamsterManager
 		//햄스터가 맵의 오른쪽으로 나가지 않도록!!
 		if(posX > GameManager.imageScaleRate * 120 - scaleX)
 		{
+			System.out.println(posX);
 			posX = GameManager.imageScaleRate * 120 - scaleX;
 		}
 //		GameViewManager.instance.DrawHamster();   삭제 main에서 repaint() 호출

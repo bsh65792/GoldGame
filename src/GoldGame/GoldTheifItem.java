@@ -6,8 +6,8 @@ public class GoldTheifItem extends Item
 	GoldTheifItem()
 	{
 		itemNumber = 3;
-		scaleX = 13f * GameManager.imageScaleRate;
-		scaleY = 13f * GameManager.imageScaleRate;
+		scaleX = 10f * GameManager.imageScaleRate;
+		scaleY = 10f * GameManager.imageScaleRate;
 	}
 
 	public void SetItemEffect()
