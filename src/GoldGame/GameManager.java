@@ -72,11 +72,20 @@ public class GameManager extends JFrame
 
 		while(true)
 		{
+			//키보드 인풋 입력
 			InputManager.instance.CheckKeyInput();
+			
+			//남은 시간 관련
 			TimeManager.instance.AddNowTime(deltaTime);
+			TimeManager.instance.SetTimePosition();
+			
+			//아이템 생성, 아이템 위치 변경, 충돌감지 & 효과발동 등
 			ItemManager.instance.TrySetItem();
 			ItemManager.instance.SetAllActivatedItemNextPosition();
 			ItemManager.instance.CheckAllActivatedItemTouch();
+			
+			HamsterManager.instance.SetWalkAnimation();
+			
 			if(TimeManager.instance.IsFinishedGame() == true) {
 				GameViewManager.instance.repaint();
 				break;
