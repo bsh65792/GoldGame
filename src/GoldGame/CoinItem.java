@@ -5,6 +5,7 @@ public class CoinItem extends Item
 
 	CoinItem()
 	{
+		itemNumber = 0;
 		scaleX = 10f * GameManager.imageScaleRate;
 		scaleY = 10f * GameManager.imageScaleRate;
 	}

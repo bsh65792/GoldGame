@@ -5,6 +5,7 @@ public class GoldBarItem extends Item
 
 	GoldBarItem()
 	{
+		itemNumber = 1;
 		scaleX = 13f * GameManager.imageScaleRate;
 		scaleY = 10f * GameManager.imageScaleRate;
 	}

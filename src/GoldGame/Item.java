@@ -60,7 +60,7 @@ public abstract class Item
 		float centerPosX = posX + scaleX / 2f;
 		
 		//y축 계산
-		if(hamsterPositionY <= centerPosY && centerPosY <= hamsterPositionY + 2f * GameManager.imageScaleRate)
+		if(hamsterPositionY <= centerPosY && centerPosY <= hamsterPositionY + 4f * GameManager.imageScaleRate)
 		{
 			//x축 계산
 			if(hamsterPositionX <= centerPosX && centerPosX <= hamsterPositionX + hamsterScaleX)
