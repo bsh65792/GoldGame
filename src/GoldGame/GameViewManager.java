@@ -82,7 +82,7 @@ public class GameViewManager extends JPanel
 		
 		g.drawImage(clock, 80*GameManager.imageScaleRate, 8*GameManager.imageScaleRate, 25*GameManager.imageScaleRate, 25*GameManager.imageScaleRate, this);
 		time = (float) (Math.round((TimeManager.instance.GetNowTime()) * 100) / 100.0);
-		g.drawString(""+ time + "", 83*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
+		g.drawString(""+ time + "", TimeManager.instance.timePosX, TimeManager.instance.timePosY);
 		g.drawString("Score : "+ ScoreManager.instance.GetScore()+ "", 10*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
 
 	}

@@ -13,6 +13,10 @@ public class HamsterManager
 	
 	private float velocity;
 	
+	private int walkAnimationNumber = 1;
+	private float nowWalkTime;
+	private final float walkTime = 0.1f;
+	
 	HamsterManager()
 	{
 		instance = this;
@@ -28,6 +32,7 @@ public class HamsterManager
 		
 		//햄스터 이동 속도. 1초당 140픽셀씩 이동한다. float로 한 이유는 10프레임에 1픽셀이 이동하거나 할 경우도 있기 때문이고, 화면에 그려줄 때는 int로 캐스팅함.
 		velocity = 210f;
+		nowWalkTime = walkTime;
 	}
 	
 	public int GetHamsterPositionX()
@@ -74,6 +79,37 @@ public class HamsterManager
 			posX = GameManager.imageScaleRate * 120 - scaleX;
 		}
 //		GameViewManager.instance.DrawHamster();   삭제 main에서 repaint() 호출
+	}
+	
+	public void SetWalkAnimation()
+	{
+		if(InputManager.instance.isLeftPressed == InputManager.instance.isRightPressed)
+		{
+			GameViewManager.instance.SetHamsterIdleImage();
+			nowWalkTime = 0f;
+			return;
+		}
+		
+		nowWalkTime -= GameManager.deltaTime;
+		
+		if(nowWalkTime <= 0f)
+		{
+			nowWalkTime = walkTime;
+			
+			if(walkAnimationNumber == 1)
+			{
+				GameViewManager.instance.SetHamsterWalk_1Image();
+				walkAnimationNumber = 2;
+			}
+			else if(walkAnimationNumber == 2)
+			{
+				GameViewManager.instance.SetHamsterWalk_2Image();
+				walkAnimationNumber = 1;
+			}
+			
+		}
+		
+		
 	}
 
 }

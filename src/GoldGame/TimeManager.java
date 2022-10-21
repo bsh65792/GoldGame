@@ -6,10 +6,16 @@ public class TimeManager
 	
 	public static TimeManager instance;
 	
+	public int timePosX;
+	public int timePosY;
+	
 	TimeManager()
 	{
 		instance = this;
-		nowTime = 50;
+		
+		nowTime = 5;
+		timePosX = 83 * GameManager.imageScaleRate;
+		timePosY = 22 * GameManager.imageScaleRate;
 	}
 	
 	public void AddNowTime(float time)
@@ -20,7 +26,23 @@ public class TimeManager
 		}
 		else{
 			nowTime -= time;
-			}
+		}
+	}
+	
+	public void SetTimePosition()
+	{
+		if(nowTime >= 10f)
+		{
+			timePosX = 83 * GameManager.imageScaleRate;
+		}
+		else if(nowTime >0f)
+		{
+			timePosX = 85 * GameManager.imageScaleRate;
+		}
+		else
+		{
+			timePosX = 88 * GameManager.imageScaleRate;
+		}
 	}
 	
 	
