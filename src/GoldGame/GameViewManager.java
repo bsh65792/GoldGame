@@ -71,6 +71,10 @@ public class GameViewManager extends JPanel
 		time = (float) (Math.round((TimeManager.instance.GetNowTime()) * 100) / 100.0);
 		g.drawString(""+ time + "", 83*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
 		g.drawString("Score : "+ ScoreManager.instance.GetScore()+ "", 10*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
+		
+		if(TimeManager.instance.IsFinishedGame() == true) {
+			g.drawString("Game Over", 40*GameManager.imageScaleRate, 120*GameManager.imageScaleRate);
+		}
 
 	}
 }
