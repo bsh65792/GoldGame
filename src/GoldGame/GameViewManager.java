@@ -136,7 +136,9 @@ public class GameViewManager extends JPanel
 		g.drawString("Score : "+ ScoreManager.instance.GetScore()+ "", 10*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
 		
 		if(TimeManager.instance.IsFinishedGame() == true) {
-			g.drawString("Game Over", 40*GameManager.imageScaleRate, 120*GameManager.imageScaleRate);
+			g.drawString("Game Over", 43*GameManager.imageScaleRate, 120*GameManager.imageScaleRate);
+			g.drawString("Press R key : Restart Game", 27 * GameManager.imageScaleRate, 130*GameManager.imageScaleRate);
+			g.drawString("Press ESC key : Exit Game", 26 * GameManager.imageScaleRate, 140*GameManager.imageScaleRate);
 		}
 		
 		if(GameManager.instance.isPlayingGame == false)

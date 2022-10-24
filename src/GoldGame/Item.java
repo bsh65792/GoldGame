@@ -40,7 +40,7 @@ public abstract class Item
 	
 	public boolean IsTouchedBottom()
 	{
-		if(posY >= 210f * GameManager.instance.imageScaleRate + scaleY)
+		if(posY >= 218f * GameManager.instance.imageScaleRate + scaleY)
 		{
 			return true;
 		}

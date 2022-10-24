@@ -13,6 +13,8 @@ public class GameManager extends JFrame
 	
 	public boolean isPlayingGame = false;
 	public boolean isStop = false;
+	public boolean isRestartGame = false;
+	public boolean isExitGame = false;
 	
 	//아래 클래스들은 이 sw에서 단 하나의 객체만 생성될 것이므로 gameManager 인스턴스 생성할 때 같이 생성해줌
 	GameViewManager gameViewManager;
@@ -56,7 +58,7 @@ public class GameManager extends JFrame
 		//startButton.addActionListener(new StartButtonListener());
 		//add(startButton, "South");
 		
-		setSize(120 * imageScaleRate, 240 * imageScaleRate);
+		setSize(124 * imageScaleRate, 250 * imageScaleRate);
 		setVisible(true);
 		addKeyListener(inputManager);
 		//(new CheckInputThread()).start();
@@ -69,36 +71,17 @@ public class GameManager extends JFrame
 	{
 		//gameManager 인스턴스 생성. 이때 생성자에서 모든 Manager 인스턴스가 함께 생성된다.
 		
-		
-		
-		GameManager gameManager = new GameManager();
-		
 		while(true)
 		{
-			if(GameManager.instance.isPlayingGame == true)
-			{
-				break;
-			}
+			GameManager gameManager = new GameManager();
 			
-			try
+			while(true)
 			{
-				Thread.sleep((int)(1000f * deltaTime));
-			}
-			catch(Exception e)
-			{
+				if(GameManager.instance.isPlayingGame == true)
+				{
+					break;
+				}
 				
-			}
-			
-			
-		}
-		
-		while(true)
-		{
-			
-			//Pause가 눌러졌는지 확인
-			if(GameManager.instance.isStop == true)
-			{
-				GameViewManager.instance.repaint();
 				try
 				{
 					Thread.sleep((int)(1000f * deltaTime));
@@ -107,48 +90,92 @@ public class GameManager extends JFrame
 				{
 					
 				}
-				continue;
-			}
-			
-			
-			//키보드 인풋 입력을 확인
-			InputManager.instance.CheckKeyInput();
-			
-			//남은 시간 관련
-			TimeManager.instance.AddNowTime(deltaTime);
-			TimeManager.instance.SetTimePosition();
-			
-			//아이템 생성, 아이템 위치 변경, 충돌감지 & 효과발동 등
-			ItemManager.instance.TrySetItem();
-			ItemManager.instance.SetAllActivatedItemNextPosition();
-			ItemManager.instance.CheckAllActivatedItemTouch();
-			ItemManager.instance.SetSpeedItem();
-			
-			HamsterManager.instance.SetWalkAnimation();
-			
-			CloudManager.instance.SetCloud();
-			
-			if(TimeManager.instance.IsFinishedGame() == true) {
-				GameViewManager.instance.repaint();
-				break;
-			}
-					
-			
-			
-			GameViewManager.instance.repaint();
-			
-			//한 프레임을 지정해 주기 위해 deltaTime만큼 잠깐 스레드를 중지시킨다.(왜 try catch문을 써야 하는지는 모르겠음)
-			try
-			{
-				Thread.sleep((int)(1000f * deltaTime));
-			}
-			catch(Exception e)
-			{
+				
 				
 			}
 			
+			while(true)
+			{
+				
+				//Pause가 눌러졌는지 확인
+				if(GameManager.instance.isStop == true)
+				{
+					GameViewManager.instance.repaint();
+					try
+					{
+						Thread.sleep((int)(1000f * deltaTime));
+					}
+					catch(Exception e)
+					{
+						
+					}
+					continue;
+				}
+				
+				
+				//키보드 인풋 입력을 확인
+				InputManager.instance.CheckKeyInput();
+				
+				//남은 시간 관련
+				TimeManager.instance.AddNowTime(deltaTime);
+				TimeManager.instance.SetTimePosition();
+				
+				//아이템 생성, 아이템 위치 변경, 충돌감지 & 효과발동 등
+				ItemManager.instance.TrySetItem();
+				ItemManager.instance.SetAllActivatedItemNextPosition();
+				ItemManager.instance.CheckAllActivatedItemTouch();
+				ItemManager.instance.SetSpeedItem();
+				
+				HamsterManager.instance.SetWalkAnimation();
+				
+				CloudManager.instance.SetCloud();
+				
+				if(TimeManager.instance.IsFinishedGame() == true) {
+					GameViewManager.instance.repaint();
+					break;
+				}
+						
+				
+				
+				GameViewManager.instance.repaint();
+				
+				//한 프레임을 지정해 주기 위해 deltaTime만큼 잠깐 스레드를 중지시킨다.(왜 try catch문을 써야 하는지는 모르겠음)
+				try
+				{
+					Thread.sleep((int)(1000f * deltaTime));
+				}
+				catch(Exception e)
+				{
+					
+				}
+				
+				
+			}
 			
+			while(true)
+			{
+				if(GameManager.instance.isRestartGame == true)
+				{
+					break;
+				}
+				if(GameManager.instance.isExitGame == true)
+				{
+					System.exit(0);
+				}
+				
+				try
+				{
+					Thread.sleep((int)(1000f * deltaTime));
+				}
+				catch(Exception e)
+				{
+					
+				}
+			}
 		}
+		
+		
+		
 	}
 	
 }
