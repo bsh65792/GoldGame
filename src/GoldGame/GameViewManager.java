@@ -20,6 +20,7 @@ public class GameViewManager extends JPanel
 	
 	Image fastArrowImage;
 	Image slowArrowImage;
+	Image descriptionImage;
 	
 	Image[] cloudImages = new Image[10];
 
@@ -42,6 +43,7 @@ public class GameViewManager extends JPanel
 		timePlusItemImage = Toolkit.getDefaultToolkit().getImage("TimePlusItem.png");
 		fastArrowImage = Toolkit.getDefaultToolkit().getImage("FastArrow.png");
 		slowArrowImage = Toolkit.getDefaultToolkit().getImage("SlowArrow.png");
+		descriptionImage = Toolkit.getDefaultToolkit().getImage("DescriptionPanel.png");
 		
 		for(int i = 0 ; i < 10 ; i++)
 		{
@@ -134,6 +136,13 @@ public class GameViewManager extends JPanel
 		if(TimeManager.instance.IsFinishedGame() == true) {
 			g.drawString("Game Over", 40*GameManager.imageScaleRate, 120*GameManager.imageScaleRate);
 		}
+		
+		if(GameManager.instance.isPlayingGame == false)
+		{
+			int descriptionPanelX = 100 * GameManager.imageScaleRate;
+			int descriptionPanelY = 160 * GameManager.imageScaleRate;
+			g.drawImage(descriptionImage, 60 * GameManager.imageScaleRate - descriptionPanelX / 2, 120 * GameManager.imageScaleRate - descriptionPanelY / 2, descriptionPanelX, descriptionPanelY, this);
+		}
 
 	}
 	
@@ -149,6 +158,7 @@ public class GameViewManager extends JPanel
 	{
 		hamster = Toolkit.getDefaultToolkit().getImage("hamsterWalk_2.png");
 	}
+	
 	
 }
 	

@@ -31,6 +31,7 @@ public class HamsterManager
 		scaleX = 45 * GameManager.imageScaleRate * 0.5f;
 		scaleY = 47 * GameManager.imageScaleRate * 0.5f;
 		
+		
 		posX = 60 * GameManager.imageScaleRate - scaleX / 2f;
 		posY = 220 * GameManager.imageScaleRate - scaleY;
 		
@@ -80,8 +81,8 @@ public class HamsterManager
 		//햄스터가 맵의 오른쪽으로 나가지 않도록!!
 		if(posX > GameManager.imageScaleRate * 120 - scaleX)
 		{
-			System.out.println(posX);
 			posX = GameManager.imageScaleRate * 120 - scaleX;
+			System.out.println(scaleX);
 		}
 //		GameViewManager.instance.DrawHamster();   삭제 main에서 repaint() 호출
 	}
