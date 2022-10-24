@@ -22,6 +22,7 @@ public class GameViewManager extends JPanel
 	Image fastArrowImage;
 	Image slowArrowImage;
 	Image descriptionImage;
+	Image keyDescriptionImage;
 	
 	Image[] cloudImages = new Image[10];
 
@@ -45,6 +46,7 @@ public class GameViewManager extends JPanel
 		fastArrowImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/FastArrow.png"));
 		slowArrowImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/SlowArrow.png"));
 		descriptionImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/DescriptionPanel.png"));
+		keyDescriptionImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/KeyDescriptionPanel.png"));
 		
 		for(int i = 0 ; i < 10 ; i++)
 		{
@@ -135,14 +137,26 @@ public class GameViewManager extends JPanel
 		g.drawString("Score : "+ ScoreManager.instance.GetScore()+ "", 10*GameManager.imageScaleRate, 22*GameManager.imageScaleRate);
 		
 		if(TimeManager.instance.IsFinishedGame() == true) {
-			g.drawString("Game Over", 40*GameManager.imageScaleRate, 120*GameManager.imageScaleRate);
+			g.drawString("Game Over", 43*GameManager.imageScaleRate, 120*GameManager.imageScaleRate);
+			g.drawString("Press R key : Restart Game", 27 * GameManager.imageScaleRate, 130*GameManager.imageScaleRate);
+			g.drawString("Press ESC key : Exit Game", 26 * GameManager.imageScaleRate, 140*GameManager.imageScaleRate);
 		}
 		
 		if(GameManager.instance.isPlayingGame == false)
 		{
-			int descriptionPanelX = 100 * GameManager.imageScaleRate;
-			int descriptionPanelY = 160 * GameManager.imageScaleRate;
-			g.drawImage(descriptionImage, 60 * GameManager.imageScaleRate - descriptionPanelX / 2, 120 * GameManager.imageScaleRate - descriptionPanelY / 2, descriptionPanelX, descriptionPanelY, this);
+			int itemDescriptionPanelX = 90 * GameManager.imageScaleRate;
+			int itemDescriptionPanelY = 150 * GameManager.imageScaleRate;
+			int keyDescriptionPanelX = 90 * GameManager.imageScaleRate;
+			int keyDescriptionPanelY = 60 * GameManager.imageScaleRate;
+			
+			g.drawImage(descriptionImage, 60 * GameManager.imageScaleRate - itemDescriptionPanelX / 2, 80 * GameManager.imageScaleRate - itemDescriptionPanelY / 2, itemDescriptionPanelX, itemDescriptionPanelY, this);
+			g.drawImage(keyDescriptionImage, 60 * GameManager.imageScaleRate - keyDescriptionPanelX / 2, 190 * GameManager.imageScaleRate - keyDescriptionPanelY / 2, keyDescriptionPanelX, keyDescriptionPanelY, this);
+		}
+		
+		if(GameManager.instance.isStop == true)
+		{
+			g.drawString("PAUSE ", 103 * GameManager.imageScaleRate / 2, 240 * GameManager.imageScaleRate / 2);
+			g.drawString("Please push ESC key to continue", 40 * GameManager.imageScaleRate / 2, 255 * GameManager.imageScaleRate / 2);
 		}
 
 	}
