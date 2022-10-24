@@ -90,7 +90,7 @@ public class GameManager extends JFrame
 				GameViewManager.instance.repaint();
 				break;
 			}
-					
+			
 			
 			
 			GameViewManager.instance.repaint();
