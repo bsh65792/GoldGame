@@ -32,8 +32,8 @@ public class ItemManager
 		itemProbabilities[2] = 30f;		//도둑햄구(-5점)
 		itemProbabilities[3] = 0.5f;	//황금햄구(모든 도둑햄구가 골드바로 바뀜)
 		itemProbabilities[4] = 0.5f;	//시간 증가
-		itemProbabilities[5] = 3f;
-		itemProbabilities[6] = 3f;
+		itemProbabilities[5] = 3f;		//FAST
+		itemProbabilities[6] = 5f;		//SLOW
 
 		
 		remainItemTime = 0;
@@ -114,10 +114,6 @@ public class ItemManager
 		item.SetActivatedItemId(NextActivatedItemId());			//아이템의 ID값 부여
 		activatedItemList.add(item);							//현재 맵에 보이는 활성화된 아이템들을 관리하는 리스트
 		
-		if(item.itemNumber == 5)
-		{
-			System.out.println("FastItem 꺼내옴!");
-		}
 		return item;
 	}
 	
