@@ -1,5 +1,6 @@
 package GoldGame;
 
+import javax.print.DocFlavor.URL;
 import javax.swing.*;
 import java.awt.*;
 
@@ -31,23 +32,23 @@ public class GameViewManager extends JPanel
 	{
 		instance = this;
 		
-		background = Toolkit.getDefaultToolkit().getImage("background.png");
-		hamster = Toolkit.getDefaultToolkit().getImage("hamster.png");
-		clock = Toolkit.getDefaultToolkit().getImage("GoldStageClock.png");
-		coinItemImage = Toolkit.getDefaultToolkit().getImage("Coin.png");
-		goldBarItemImage = Toolkit.getDefaultToolkit().getImage("GoldBar.png");
-		minusItemImage = Toolkit.getDefaultToolkit().getImage("Theif.png");
-		goldTheifItemImage = Toolkit.getDefaultToolkit().getImage("GoldTheif.png");
-		fastItemImage = Toolkit.getDefaultToolkit().getImage("FastItem.png");
-		slowItemImage = Toolkit.getDefaultToolkit().getImage("SlowItem.png");
-		timePlusItemImage = Toolkit.getDefaultToolkit().getImage("TimePlusItem.png");
-		fastArrowImage = Toolkit.getDefaultToolkit().getImage("FastArrow.png");
-		slowArrowImage = Toolkit.getDefaultToolkit().getImage("SlowArrow.png");
-		descriptionImage = Toolkit.getDefaultToolkit().getImage("DescriptionPanel.png");
+		background = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/background.png"));
+		hamster = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/hamster.png"));
+		clock = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/GoldStageClock.png"));
+		coinItemImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/Coin.png"));
+		goldBarItemImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/GoldBar.png"));
+		minusItemImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/Theif.png"));
+		goldTheifItemImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/GoldTheif.png"));
+		fastItemImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/FastItem.png"));
+		slowItemImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/SlowItem.png"));
+		timePlusItemImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/TimePlusItem.png"));
+		fastArrowImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/FastArrow.png"));
+		slowArrowImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/SlowArrow.png"));
+		descriptionImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/DescriptionPanel.png"));
 		
 		for(int i = 0 ; i < 10 ; i++)
 		{
-			cloudImages[i] = Toolkit.getDefaultToolkit().getImage("Cloud_" + i + ".png");
+			cloudImages[i] = Toolkit.getDefaultToolkit().getImage("src/image/Cloud_" + i + ".png");
 		}
 		
 
@@ -148,15 +149,15 @@ public class GameViewManager extends JPanel
 	
 	public void SetHamsterIdleImage()
 	{
-		hamster = Toolkit.getDefaultToolkit().getImage("hamster.png");
+		hamster = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/hamster.png"));
 	}
 	public void SetHamsterWalk_1Image()
 	{
-		hamster = Toolkit.getDefaultToolkit().getImage("hamsterWalk_1.png");
+		hamster = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/hamsterWalk_1.png"));
 	}
 	public void SetHamsterWalk_2Image()
 	{
-		hamster = Toolkit.getDefaultToolkit().getImage("hamsterWalk_2.png");
+		hamster = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/hamsterWalk_2.png"));
 	}
 	
 	

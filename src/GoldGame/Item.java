@@ -62,7 +62,7 @@ public abstract class Item
 		//y축 계산
 		if(hamsterPositionY <= centerPosY && centerPosY <= hamsterPositionY + 4f * GameManager.imageScaleRate)
 		{
-			//x축 계산
+			//x축 계산	
 			if(hamsterPositionX <= centerPosX && centerPosX <= hamsterPositionX + hamsterScaleX)
 			{
 				return true;
