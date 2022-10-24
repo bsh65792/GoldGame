@@ -15,7 +15,16 @@ public class GameViewManager extends JPanel
 	Image minusItemImage;
 	Image goldTheifItemImage;
 	Image timePlusItemImage;
+	Image fastItemImage;
+	Image slowItemImage;
 	
+	Image fastArrowImage;
+	Image slowArrowImage;
+	Image descriptionImage;
+	
+	Image[] cloudImages = new Image[10];
+
+
 	private final Font font = new Font("맑은 고딕", Font.BOLD | Font.ITALIC, 20);
 	
 	public GameViewManager()
@@ -29,7 +38,19 @@ public class GameViewManager extends JPanel
 		goldBarItemImage = Toolkit.getDefaultToolkit().getImage("GoldBar.png");
 		minusItemImage = Toolkit.getDefaultToolkit().getImage("Theif.png");
 		goldTheifItemImage = Toolkit.getDefaultToolkit().getImage("GoldTheif.png");
+		fastItemImage = Toolkit.getDefaultToolkit().getImage("FastItem.png");
+		slowItemImage = Toolkit.getDefaultToolkit().getImage("SlowItem.png");
 		timePlusItemImage = Toolkit.getDefaultToolkit().getImage("TimePlusItem.png");
+		fastArrowImage = Toolkit.getDefaultToolkit().getImage("FastArrow.png");
+		slowArrowImage = Toolkit.getDefaultToolkit().getImage("SlowArrow.png");
+		descriptionImage = Toolkit.getDefaultToolkit().getImage("DescriptionPanel.png");
+		
+		for(int i = 0 ; i < 10 ; i++)
+		{
+			cloudImages[i] = Toolkit.getDefaultToolkit().getImage("Cloud_" + i + ".png");
+		}
+		
+
 		
 	}
 	
@@ -48,12 +69,26 @@ public class GameViewManager extends JPanel
 		//이미지를 그림
 		g.drawImage(background, 0, 0, 120 * GameManager.imageScaleRate, 240 * GameManager.imageScaleRate, this);
 		
+		for(int i = 0 ; i < CloudManager.instance.cloudList.size(); i++)
+		{
+			Cloud cloud = CloudManager.instance.cloudList.get(i);
+			g.drawImage(cloudImages[cloud.cloudType], (int)cloud.posX, (int)cloud.posY, (int)cloud.scaleX, (int)cloud.scaleY, this);
+		}
+		
 		
 		int activatedHamsterQuantity = ItemManager.instance.activatedItemList.size();
 		
 		for(int i = 0 ; i < activatedHamsterQuantity ; i++)
 		{
-			Item item = ItemManager.instance.activatedItemList.get(i);
+			Item item;
+			
+			if(ItemManager.instance.activatedItemList.get(i) == null)
+			{
+				continue;
+			}
+			
+			item = ItemManager.instance.activatedItemList.get(i);
+			
 			switch(item.itemNumber)
 			{
 			case 0:
@@ -71,6 +106,12 @@ public class GameViewManager extends JPanel
 			case 4:
 				g.drawImage(timePlusItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
 				break;
+			case 5:
+				g.drawImage(fastItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
+				break;
+			case 6:
+				g.drawImage(slowItemImage, (int)item.posX, (int)item.posY, (int)item.scaleX, (int)item.scaleY, this);
+
 			default:
 				break;
 			}
@@ -84,6 +125,8 @@ public class GameViewManager extends JPanel
 		{
 			g.drawImage(hamster, hamsterPosX, hamsterPosY, hamsterScaleX, hamsterScaleY, this);
 		}
+		g.drawImage(fastArrowImage, (int)SpeedArrow.instance.fastArrowPosX, (int)SpeedArrow.instance.fastArrowPosY, (int)SpeedArrow.instance.scaleX, (int)SpeedArrow.instance.scaleY, this);
+		g.drawImage(slowArrowImage, (int)SpeedArrow.instance.slowArrowPosX, (int)SpeedArrow.instance.slowArrowPosY, (int)SpeedArrow.instance.scaleX, (int)SpeedArrow.instance.scaleY, this);
 		
 		g.drawImage(clock, 80*GameManager.imageScaleRate, 8*GameManager.imageScaleRate, 25*GameManager.imageScaleRate, 25*GameManager.imageScaleRate, this);
 		time = (float) (Math.round((TimeManager.instance.GetNowTime()) * 100) / 100.0);
@@ -92,6 +135,13 @@ public class GameViewManager extends JPanel
 		
 		if(TimeManager.instance.IsFinishedGame() == true) {
 			g.drawString("Game Over", 40*GameManager.imageScaleRate, 120*GameManager.imageScaleRate);
+		}
+		
+		if(GameManager.instance.isPlayingGame == false)
+		{
+			int descriptionPanelX = 100 * GameManager.imageScaleRate;
+			int descriptionPanelY = 160 * GameManager.imageScaleRate;
+			g.drawImage(descriptionImage, 60 * GameManager.imageScaleRate - descriptionPanelX / 2, 120 * GameManager.imageScaleRate - descriptionPanelY / 2, descriptionPanelX, descriptionPanelY, this);
 		}
 
 	}
@@ -108,6 +158,7 @@ public class GameViewManager extends JPanel
 	{
 		hamster = Toolkit.getDefaultToolkit().getImage("hamsterWalk_2.png");
 	}
+	
 	
 }
 	

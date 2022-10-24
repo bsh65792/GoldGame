@@ -6,8 +6,8 @@ public class TimePlusItem extends Item
 	TimePlusItem()
 	{
 		itemNumber = 4;
-		scaleX = 10f * GameManager.imageScaleRate;
-		scaleY = 10f * GameManager.imageScaleRate;
+		scaleX = 8f * GameManager.imageScaleRate;
+		scaleY = 8f * GameManager.imageScaleRate;
 	}
 
 	public void SetItemEffect()

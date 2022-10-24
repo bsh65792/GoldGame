@@ -6,8 +6,8 @@ public class CoinItem extends Item
 	CoinItem()
 	{
 		itemNumber = 0;
-		scaleX = 10f * GameManager.imageScaleRate;
-		scaleY = 10f * GameManager.imageScaleRate;
+		scaleX = 8f * GameManager.imageScaleRate;
+		scaleY = 8f * GameManager.imageScaleRate;
 	}
 
 	public void SetItemEffect()
