@@ -50,6 +50,24 @@ public class InputManager implements KeyListener
     	{
     		GameManager.instance.isPlayingGame = true;
     	}
+    	
+    	if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+    	{
+    		if(GameManager.instance.isPlayingGame == false)
+    		{
+    			return;
+    		}
+    		
+    		if(GameManager.instance.isStop == false)
+    		{
+    			GameManager.instance.isStop = true;
+    		}
+    		else
+    		{
+    			GameManager.instance.isStop = false;
+    		}
+    		
+    	}
     }
     
     @Override
@@ -95,10 +113,6 @@ public class InputManager implements KeyListener
 		}
 		
 	}
-    
-    
-    
-    
     
     
 }

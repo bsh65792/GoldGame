@@ -21,6 +21,7 @@ public class GameViewManager extends JPanel
 	Image fastArrowImage;
 	Image slowArrowImage;
 	Image descriptionImage;
+	Image keyDescriptionImage;
 	
 	Image[] cloudImages = new Image[10];
 
@@ -44,6 +45,7 @@ public class GameViewManager extends JPanel
 		fastArrowImage = Toolkit.getDefaultToolkit().getImage("FastArrow.png");
 		slowArrowImage = Toolkit.getDefaultToolkit().getImage("SlowArrow.png");
 		descriptionImage = Toolkit.getDefaultToolkit().getImage("DescriptionPanel.png");
+		keyDescriptionImage = Toolkit.getDefaultToolkit().getImage("KeyDescriptionPanel.png");
 		
 		for(int i = 0 ; i < 10 ; i++)
 		{
@@ -139,9 +141,19 @@ public class GameViewManager extends JPanel
 		
 		if(GameManager.instance.isPlayingGame == false)
 		{
-			int descriptionPanelX = 100 * GameManager.imageScaleRate;
-			int descriptionPanelY = 160 * GameManager.imageScaleRate;
-			g.drawImage(descriptionImage, 60 * GameManager.imageScaleRate - descriptionPanelX / 2, 120 * GameManager.imageScaleRate - descriptionPanelY / 2, descriptionPanelX, descriptionPanelY, this);
+			int itemDescriptionPanelX = 90 * GameManager.imageScaleRate;
+			int itemDescriptionPanelY = 150 * GameManager.imageScaleRate;
+			int keyDescriptionPanelX = 90 * GameManager.imageScaleRate;
+			int keyDescriptionPanelY = 60 * GameManager.imageScaleRate;
+			
+			g.drawImage(descriptionImage, 60 * GameManager.imageScaleRate - itemDescriptionPanelX / 2, 80 * GameManager.imageScaleRate - itemDescriptionPanelY / 2, itemDescriptionPanelX, itemDescriptionPanelY, this);
+			g.drawImage(keyDescriptionImage, 60 * GameManager.imageScaleRate - keyDescriptionPanelX / 2, 190 * GameManager.imageScaleRate - keyDescriptionPanelY / 2, keyDescriptionPanelX, keyDescriptionPanelY, this);
+		}
+		
+		if(GameManager.instance.isStop == true)
+		{
+			g.drawString("PAUSE ", 103 * GameManager.imageScaleRate / 2, 240 * GameManager.imageScaleRate / 2);
+			g.drawString("Please push ESC key to continue", 40 * GameManager.imageScaleRate / 2, 255 * GameManager.imageScaleRate / 2);
 		}
 
 	}

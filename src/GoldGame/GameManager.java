@@ -12,6 +12,7 @@ public class GameManager extends JFrame
 	public static int imageScaleRate = 4;			//image 이동 및 배치, 크기조절 등에 모두 곱해주어서 혹시라도 화면크기를 조정해야 할 때 해당 변수 하나만 바꿔줄 수 있도록 static으로 지정함
 	
 	public boolean isPlayingGame = false;
+	public boolean isStop = false;
 	
 	//아래 클래스들은 이 sw에서 단 하나의 객체만 생성될 것이므로 gameManager 인스턴스 생성할 때 같이 생성해줌
 	GameViewManager gameViewManager;
@@ -90,12 +91,27 @@ public class GameManager extends JFrame
 			
 			
 		}
-
-		
 		
 		while(true)
 		{
-			//키보드 인풋 입력
+			
+			//Pause가 눌러졌는지 확인
+			if(GameManager.instance.isStop == true)
+			{
+				GameViewManager.instance.repaint();
+				try
+				{
+					Thread.sleep((int)(1000f * deltaTime));
+				}
+				catch(Exception e)
+				{
+					
+				}
+				continue;
+			}
+			
+			
+			//키보드 인풋 입력을 확인
 			InputManager.instance.CheckKeyInput();
 			
 			//남은 시간 관련
